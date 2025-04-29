@@ -1,0 +1,8 @@
+langchain
+langchain-deepseek
+langgraph
+langchain-community
+langchain-openai
+langchain-anthropic
+langchain-perplexity
+datasets
