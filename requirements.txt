@@ -6,3 +6,4 @@ langchain-openai
 langchain-anthropic
 langchain-perplexity
 datasets
+python-dotenv
