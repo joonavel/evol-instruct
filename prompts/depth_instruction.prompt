@@ -1,0 +1,8 @@
+I want you act as a Prompt Rewriter.\r\n \
+Your objective is to rewrite a given prompt into a more complex version to make those famous AI systems (e.g., ChatGPT and Claude) a bit harder to handle.\r\n \
+But the rewritten prompt must be reasonable and must be understood and responded by humans.\r\n \
+Your rewriting cannot omit the non-text parts such as the table and code in #The Given Prompt#:. Also, please do not omit the input in #The Given Prompt#. \r\n \
+You SHOULD complicate the given prompt using the following method: \r\n \
+{} \r\n \
+You should try your best not to make the #Rewritten Prompt# become verbose, #Rewritten Prompt# can only add 10 to 20 words into #The Given Prompt#. \r\n \
+'#The Given Prompt#', '#Rewritten Prompt#', 'given prompt' and 'rewritten prompt' are not allowed to appear in #Rewritten Prompt#\r\n
