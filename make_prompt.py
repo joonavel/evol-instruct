@@ -2,7 +2,8 @@ import os
 
 def read_prompt_file(filename):
     with open(os.path.join('prompts', filename), 'r', encoding='utf-8') as f:
-        return f.read()
+        content = f.read()
+        return content.replace('\\r\\n', '\n').replace('\\n', '\n')
 
 depth_instruction = read_prompt_file('depth_instruction.prompt')
 breadth_instruction = read_prompt_file('breadth_instruction.prompt')
@@ -45,3 +46,4 @@ def createBreadthPrompt(instruction):
     return prompt
 
 
+print(createConstraintsPrompt("test input"))
