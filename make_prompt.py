@@ -7,6 +7,8 @@ def read_prompt_file(filename):
 
 depth_instruction = read_prompt_file('depth_instruction.prompt')
 breadth_instruction = read_prompt_file('breadth_instruction.prompt')
+equality_check_instruction = read_prompt_file('equality_check_instruction.prompt')
+answer_filling_instruction = read_prompt_file('answer_filling_instruction.prompt')
 
 def createConstraintsPrompt(instruction):
     prompt = depth_instruction.format("Please add one more constraints/requirements into #The Given Prompt#'")
@@ -44,6 +46,3 @@ def createBreadthPrompt(instruction):
     prompt += "Write in Korean."
     prompt += "#Given Prompt#: \r\n {} \r\n".format(instruction)
     return prompt
-
-
-print(createConstraintsPrompt("test input"))
