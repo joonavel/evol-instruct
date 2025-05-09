@@ -3,7 +3,7 @@ from utils.utils import RewrittenPrompt, EqualityResult, set_seed, ModelConfig
 from utils.prompt import create_chat_prompt
 import random, os, getpass
 from dotenv import load_dotenv
-from make_prompt import (createBreadthPrompt, createComplicatingPrompt, createConcretizingPrompt,
+from utils.prompt import (createBreadthPrompt, createComplicatingPrompt, createConcretizingPrompt,
                          createConstraintsPrompt, createDeepenPrompt, createReasoningPrompt,
                          equality_check_instruction)
 from utils.utils import get_data_from_json, make_empty_structure, make_empty_structure_for_failures, check_failure, check_flag_true, check_flag_false
