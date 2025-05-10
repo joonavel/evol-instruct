@@ -4,6 +4,7 @@
 
 ## Introduction
 이 레포는 아래 논문의 evol-instruct(evolving)기법을 참고하여 instruction evolution을 통해 한국어 데이터를 증강시키기 위한 자동화 알고리즘을 구현한 레포입니다.
+
 WizardLM: Empowering Large Language Models to Follow Complex Instructions
 (https://arxiv.org/abs/2304.12244)
 
