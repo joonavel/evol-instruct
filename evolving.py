@@ -9,14 +9,6 @@ from utils.prompt import (createBreadthPrompt, createComplicatingPrompt, createC
 from utils.utils import get_data_from_json, make_empty_structure, make_empty_structure_for_failures, check_failure, check_flag_true, check_flag_false
 from tqdm import tqdm
 import pandas as pd
-
-use_local = False
-use_deepseek = True
-
-load_dotenv()
-if not use_local and use_deepseek:
-    if not os.getenv("DEEPSEEK_API_KEY"):
-        os.environ["DEEPSEEK_API_KEY"] = getpass.getpass("Enter your DeepSeek API key: ")
     
 def mutate(current_generations, failures, templates, batch_size, mutation_chain, validation_chain):
     population = len(current_generations['generation'])
@@ -81,13 +73,13 @@ def mutate(current_generations, failures, templates, batch_size, mutation_chain,
 
 
 def evolve(seed_path: str, whole_path: str, failures_path: str, total_gen: int, batch_size: int,
-           seed: int = 42, save_location: str = "./", save_last_gen: bool = False, test_run: bool = False) -> None:
+           seed: int = 42, save_location: str = "./", save_last_gen: bool = False, test_run: bool = False, **kwargs) -> None:
     set_seed(seed)
     
     # 모델 준비
     mutator = get_structured_llm(RewrittenPrompt) # 기본 config 사용
 
-    validator_config = ModelConfig(temperature=0,max_tokens=100,timeout=100,max_retries=2)
+    validator_config = ModelConfig(**kwargs)
     validator = get_structured_llm(EqualityResult, config=validator_config)
     # 프롬프트 준비
     prompt = create_chat_prompt()
@@ -97,8 +89,8 @@ def evolve(seed_path: str, whole_path: str, failures_path: str, total_gen: int, 
 
     # evolution을 위한 데이터 준비
     current_generations = get_data_from_json(seed_path, test_run)
-    whole_generations = get_data_from_json(whole_path) if whole_path else get_data_from_json(seed_path, test_run)
-    failures = get_data_from_json(failures_path) if failures_path else make_empty_structure_for_failures()
+    whole_generations = get_data_from_json(whole_path) if os.path.exists(whole_path) else get_data_from_json(seed_path, test_run)
+    failures = get_data_from_json(failures_path) if os.path.exists(failures_path) else make_empty_structure_for_failures()
     
     templates = [createBreadthPrompt, createComplicatingPrompt, createConcretizingPrompt,
                 createConstraintsPrompt, createDeepenPrompt, createReasoningPrompt]
@@ -112,13 +104,12 @@ def evolve(seed_path: str, whole_path: str, failures_path: str, total_gen: int, 
         current_generations = next_generations
     
     # 최종 결과 저장
-    pd.DataFrame(whole_generations).to_json(path_or_buf=save_location+"whole_generations.json",
+    final_df = pd.DataFrame(whole_generations)
+    final_df['output'] = ["IDK"] * len(final_df)
+    final_df.to_json(path_or_buf=whole_path,
                                             orient='split', index=False)
-    pd.DataFrame(failures).to_json(path_or_buf=save_location+"failures.json",
+    pd.DataFrame(failures).to_json(path_or_buf=failures_path,
                                   orient='split', index=False)
     if save_last_gen:
         pd.DataFrame(current_generations).to_json(path_or_buf=save_location+f"gen_{total_gen}.json",
                                                   orient='split', index=False)
-        
-evolve(seed_path='./seed_instruction.json', whole_path='', failures_path='',
-       total_gen=5, batch_size=5, save_location='./', save_last_gen=True, test_run=True)

@@ -1,7 +1,7 @@
 from langchain_deepseek import ChatDeepSeek
 from utils import ModelConfig
 
-def get_structured_llm(basemodel, model_name: str = "deepseek-chat", config: ModelConfig | None = None, **kwargs):
+def get_structured_llm(basemodel, model_name: str = "deepseek-chat", config: ModelConfig | None = None, include_raw: bool = False, **kwargs):
     '''LangChain의 프레임 워크를 이용해서 구조화된 출력을 반환하는 ChatDeepSeek 모델을 반환하는 함수입니다.
     basemodel: 출력 구조를 정의하는 langchain_core.pydantic_v1.BaseModel
     model_name: str = "deepseek-chat"
@@ -20,5 +20,5 @@ def get_structured_llm(basemodel, model_name: str = "deepseek-chat", config: Mod
         **model_params
     )
 
-    structured_llm = llm.with_structured_output(basemodel)
+    structured_llm = llm.with_structured_output(basemodel, include_raw=include_raw)
     return structured_llm

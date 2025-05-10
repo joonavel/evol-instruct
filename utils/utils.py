@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import Dict, List, Optional
+from typing import Dict, List
 from pydantic import BaseModel, Field
 import random
 
@@ -38,11 +38,11 @@ def get_data_from_json(file_path: str = './seed_instruction.json', test_run: boo
     file_path: .json 확장자로 저장된 seed 데이터'''
     # instruction, generation, root, trace, origin
     if test_run:
-        seed_data = pd.read_json(file_path, orient='split', dtype={'trace':'str'})[:10].to_dict('list')
+        data = pd.read_json(file_path, orient='split', dtype={'trace':'str'})[:10].to_dict('list')
     else:
-        seed_data = pd.read_json(file_path, orient='split', dtype={'trace':'str'}).to_dict('list')
-    print(f"seed_data's keys: {seed_data.keys()}")
-    return seed_data
+        data = pd.read_json(file_path, orient='split', dtype={'trace':'str'}).to_dict('list')
+    print(f"data's keys: {data.keys()}")
+    return data
 
 
 def check_failure(before, after):
@@ -90,4 +90,3 @@ def make_empty_structure_for_failures():
         "trace": [],
         "origin": [],
     }
-print(get_data_from_json(test_run=True)['trace'])
