@@ -1,5 +1,7 @@
 # koevol-instruct
 
+[English](README.md) | [한국어](README.ko.md)
+
 ## Introduction
 This repository implements an automated algorithm for augmenting Korean language data through instruction evolution, based on the evol-instruct (evolving) technique from the following paper:
 WizardLM: Empowering Large Language Models to Follow Complex Instructions
@@ -103,9 +105,12 @@ To verify the usefulness of data generated through this repository's method, we 
 
 Using the KMMLU dataset for model evaluation, the model trained with our generated dataset showed higher performance:
 
-base model: 0.468
-with kolima(epoch8): 0.494 https://huggingface.co/joonavel/Phi-4-kolima-adapter
-with koevol(epoch8): 0.499 https://huggingface.co/joonavel/Phi-4-koevol-adapter
+
+**base model**: 0.468
+
+**with kolima(epoch8)**: 0.494 https://huggingface.co/joonavel/Phi-4-kolima-adapter
+
+**with koevol(epoch8)**: 0.499 https://huggingface.co/joonavel/Phi-4-koevol-adapter
 
 ## Cautions
 - It is recommended to adjust parameters through test runs. 

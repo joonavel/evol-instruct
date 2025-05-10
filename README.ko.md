@@ -1,5 +1,7 @@
 # koevol-instruct
 
+[English](README.md) | [한국어](README.ko.md)
+
 ## Introduction
 이 레포는 아래 논문의 evol-instruct(evolving)기법을 참고하여 instruction evolution을 통해 한국어 데이터를 증강시키기 위한 자동화 알고리즘을 구현한 레포입니다.
 WizardLM: Empowering Large Language Models to Follow Complex Instructions
@@ -103,9 +105,11 @@ Depth evolution의 Complicating 프롬프트를 제외하고 모든 depth, bread
 
 KMMLU 데이터셋을 활용하여 모델의 성능을 평가한 결과 이 레포에서 생성한 데이터셋을 활용한 모델이 더 높은 성능을 보였습니다.
 
-base model: 0.468
-with kolima(epoch8): 0.494 https://huggingface.co/joonavel/Phi-4-kolima-adapter
-with koevol(epoch8): 0.499 https://huggingface.co/joonavel/Phi-4-koevol-adapter
+**base model**: 0.468
+
+**with kolima(epoch8)**: 0.494 https://huggingface.co/joonavel/Phi-4-kolima-adapter
+
+**with koevol(epoch8)**: 0.499 https://huggingface.co/joonavel/Phi-4-koevol-adapter
 
 ## Cautions
 - 테스트 실행을 통해 파라미터를 조정하는 것을 권장합니다.
