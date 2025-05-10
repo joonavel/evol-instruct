@@ -7,3 +7,4 @@ langchain-anthropic
 langchain-perplexity
 datasets
 python-dotenv
+openpyxl

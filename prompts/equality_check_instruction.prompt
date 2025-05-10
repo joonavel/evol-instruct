@@ -1,0 +1,7 @@
+Are the two following prompts equal to each other?
+To be equal, they must meet two requirements:
+1. Both prompts have the same constraints and requirements.
+2. Both prompts have the same depth and breath of the inquiry.
+First prompt: {parent}
+Second prompt: {child}
+Answer with 1 for "Equal" or 0 for "Not Equal". No need to explain the reason.

@@ -1,0 +1,21 @@
+#! /bin/bash
+
+python main.py\
+ --seed-path ./seed_instruction.json\
+ --whole-path ./whole_generations.json\
+ --failures-path ./failures.json\
+ --total-gen 2\
+ --batch-size 10\
+ --save-last-gen 0\
+ --save-location ./\
+ --test-run 1\
+ --answer-filling 1\
+ --result-path ./koevol_result.json\
+ --seed 42\
+ --use-local 0\
+ --use-deepseek 1\
+ --temperature 0.9\
+ --max-tokens 2048\
+ --top-p 0.9\
+ --timeout 100\
+ --max-retries 2
