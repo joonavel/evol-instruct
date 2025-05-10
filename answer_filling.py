@@ -1,7 +1,7 @@
 from utils.model import get_structured_llm
 from utils.utils import Response, ModelConfig 
 from utils.prompt import answer_filling_instruction, create_chat_prompt
-from utils.utils import get_data_from_json
+from utils.utils import get_data_from_json, check_failure
 from tqdm import tqdm
 import pandas as pd
 
@@ -39,6 +39,11 @@ def answer_filling(whole_path: str, save_path: str, batch_size: int = 10) -> Non
                 temp.append("parsing_error")
             else:
                 temp.append(res['parsed'].answer)
+        # 답변 후처리
+        flags = [check_failure(seed, candidate) for seed, candidate in zip(questions[start:end], temp)]
+        # 후처리 결과에 따라 검수
+        temp = [x if flag else "IDK" for x, flag in zip(temp, flags)]
+        
         responses += temp
         
     temp_df.loc[temp_df['output'] == 'IDK', ['output']] = responses
